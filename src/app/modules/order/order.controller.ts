@@ -1,43 +1,38 @@
-// import { NextFunction, Request, RequestHandler, Response } from "express";
-// import httpStatus from "http-status";
-// import sendResponse from "../../../shared/sendResponse";
-// import catchAsync from "../../../shared/catchAsync";
-// import { paginationKeys } from "../../../constants/pagination";
-// import pick from "../../../shared/pick";
+import { Request, RequestHandler, Response } from "express";
+import httpStatus from "http-status";
+import sendResponse from "../../../shared/sendResponse";
+import catchAsync from "../../../shared/catchAsync";
+import { OrderServices } from "./order.service";
 
-// const createOrder: RequestHandler = catchAsync(
-//      async (req: Request, res: Response) => {
-//           const { ...userData } = req.body;
+const createOrder: RequestHandler = catchAsync(
+     async (req: Request, res: Response) => {
+          const { ...OrderData } = req.body;
 
-//           const result = await OrderServices.createOrder;
+          const result = await OrderServices.createOrder(OrderData);
 
-//           sendResponse(res, {
-//                statusCode: httpStatus.OK,
-//                success: true,
-//                message: "Cow created successfully",
-//                data: result,
-//           });
-//      }
-// );
+          sendResponse(res, {
+               statusCode: httpStatus.OK,
+               success: true,
+               message: "Order created successfully",
+               data: result,
+          });
+     }
+);
 
-// const getAllOrders: RequestHandler = catchAsync(
-//      async (req: Request, res: Response) => {
-//           const query = req.query;
+const getAllOrders: RequestHandler = catchAsync(
+     async (req: Request, res: Response) => {
+          const result = await OrderServices.getAllOrders();
 
-//           const result = await
+          sendResponse(res, {
+               statusCode: httpStatus.OK,
+               success: true,
+               message: "Order retrieved successfully",
+               data: result,
+          });
+     }
+);
 
-//           sendResponse(res, {
-//                statusCode: httpStatus.OK,
-//                success: true,
-//                message: "Cows retrieved successfully",
-//                data: result.data,
-//                meta: result.meta,
-//           });
-//      }
-// );
-
-// export const CowController = {
-//   createOrder,
-//      getAllOrders,
-
-// };
+export const OrderControllers = {
+     createOrder,
+     getAllOrders,
+};
