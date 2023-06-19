@@ -1,7 +1,5 @@
-// import { Model } from "mongoose";
-
-export type IUserRole = "seller" | "buyer";
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // export type IUsers = {
 //      phoneNumber: string;
 //      role: IUserRole;
@@ -14,5 +12,4 @@ export type IUserRole = "seller" | "buyer";
 //      budget: string;
 //      income: string;
 // };
-
 // export type UserModal = Model<IUsers>;
