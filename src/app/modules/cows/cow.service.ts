@@ -15,7 +15,7 @@ const getCows = async (
      pageinationOptions: IPagenaionOptions
 ) => {
      // const { query, ...filtersData } = filters;
-     const { searchTerm, ...filtersData } = filters;
+     const { searchTerm, minPrice, maxPrice, ...filtersData } = filters;
 
      const andCondation = [];
 
@@ -24,6 +24,20 @@ const getCows = async (
                $or: cowSearchingFields.map((field) => ({
                     [field]: { $regex: searchTerm, $options: "i" },
                })),
+          });
+     }
+     if (minPrice) {
+          andCondation.push({
+               price: {
+                    $gte: Number(minPrice),
+               },
+          });
+     }
+     if (maxPrice) {
+          andCondation.push({
+               price: {
+                    $lte: Number(maxPrice),
+               },
           });
      }
 
