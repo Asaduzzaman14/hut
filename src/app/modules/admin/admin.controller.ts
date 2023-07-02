@@ -1,3 +1,4 @@
+import { IAdminInterface } from "./admin.interfce";
 import { Request, RequestHandler, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import { AdminServices } from "./admin.service";
@@ -18,3 +19,15 @@ const createAdminController: RequestHandler = catchAsync(
     });
   }
 );
+
+const loginAdminController: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const { logindata } = req.body;
+    console.log(logindata);
+  }
+);
+
+export const AdminController = {
+  createAdminController,
+  loginAdminController,
+};

@@ -1,7 +1,9 @@
 import { Schema, model } from "mongoose";
 import { AdminModel, IAdminInterface } from "./admin.interfce";
+import bcrypt from "bcrypt";
+import config from "../../../config";
 
-const adminSchema = new Schema<IAdminInterface>(
+export const adminSchema = new Schema<IAdminInterface>(
   {
     phoneNumber: {
       type: String,
@@ -10,7 +12,7 @@ const adminSchema = new Schema<IAdminInterface>(
     },
     role: {
       type: String,
-      require: true,
+      required: true,
       enum: ["admin"],
     },
     password: {
@@ -18,13 +20,15 @@ const adminSchema = new Schema<IAdminInterface>(
       required: true,
     },
     name: {
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
-        type: String,
-        required: true,
+      type: {
+        firstName: {
+          type: String,
+          required: true,
+        },
+        lastName: {
+          type: String,
+          required: true,
+        },
       },
       required: true,
     },
@@ -37,5 +41,15 @@ const adminSchema = new Schema<IAdminInterface>(
     timestamps: true,
   }
 );
+
+// hasing password before save data
+adminSchema.pre("save", async function (next) {
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(config.bycrypt_solt_rounds)
+  );
+
+  next();
+});
 
 export const Admin = model<IAdminInterface, AdminModel>("admin", adminSchema);
