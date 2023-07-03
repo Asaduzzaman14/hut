@@ -1,5 +1,9 @@
+import bcrypt from "bcrypt";
 import { Schema, model } from "mongoose";
 import { AuthUserModal, IAuthUsers } from "./auth.interface";
+import config from "../../../config";
+import { boolean } from "zod";
+import { IAdminInterface } from "../admin/admin.interfce";
 
 const userSchema = new Schema<IAuthUsers>(
   {
@@ -44,5 +48,38 @@ const userSchema = new Schema<IAuthUsers>(
     timestamps: true,
   }
 );
+
+// hasing password before save data
+userSchema.pre("save", async function (next) {
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(config.bycrypt_solt_rounds)
+  );
+
+  next();
+});
+
+userSchema.statics.isAdminExist = async function (
+  phone: string
+): Promise<IAuthUsers | null> {
+  const user = await User.findOne({ phoneNumber: phone });
+
+  return user;
+};
+
+userSchema.statics.isPasswordMatch = async function (
+  providedPassword: string,
+  previewsPass: string
+): Promise<boolean> {
+  return await bcrypt.compare(providedPassword, previewsPass);
+};
+
+userSchema.statics.isAdminExist = async function (
+  phone: string
+): Promise<IAdminInterface | null> {
+  const user = await User.findOne({ phoneNumber: phone });
+
+  return user;
+};
 
 export const User = model<IAuthUsers, AuthUserModal>("users", userSchema);

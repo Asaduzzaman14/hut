@@ -42,6 +42,14 @@ export const adminSchema = new Schema<IAdminInterface>(
   }
 );
 
+adminSchema.statics.isAdminExist = async function (
+  phone: string
+): Promise<IAdminInterface | null> {
+  const admin = await Admin.findOne({ phoneNumber: phone });
+
+  return admin;
+};
+
 // hasing password before save data
 adminSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(
@@ -51,5 +59,12 @@ adminSchema.pre("save", async function (next) {
 
   next();
 });
+
+adminSchema.statics.isPasswordMatch = async function (
+  providedPassword: string,
+  previewsPass: string
+): Promise<boolean> {
+  return await bcrypt.compare(providedPassword, previewsPass);
+};
 
 export const Admin = model<IAdminInterface, AdminModel>("admin", adminSchema);
