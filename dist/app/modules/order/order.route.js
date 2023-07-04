@@ -7,6 +7,10 @@ exports.OrderRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const order_controller_1 = require("./order.controller");
 const router = express_1.default.Router();
-router.post("/", order_controller_1.OrderControllers.createOrder);
-router.get("/", order_controller_1.OrderControllers.createOrder);
+router.post("/", 
+//  auth(ENUM_USER_ROLE.BUYER),
+order_controller_1.OrderControllers.createOrder);
+router.get("/", 
+// auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
+order_controller_1.OrderControllers.createOrder);
 exports.OrderRoutes = router;

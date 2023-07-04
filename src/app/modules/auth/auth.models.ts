@@ -59,13 +59,13 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.statics.isAdminExist = async function (
-  phone: string
-): Promise<IAuthUsers | null> {
-  const user = await User.findOne({ phoneNumber: phone });
+// userSchema.statics.isUserExist = async function (
+//   phone: string
+// ): Promise<IAuthUsers | null> {
+//   const user = await User.findOne({ phoneNumber: phone });
 
-  return user;
-};
+//   return user;
+// };
 
 userSchema.statics.isPasswordMatch = async function (
   providedPassword: string,
@@ -74,7 +74,7 @@ userSchema.statics.isPasswordMatch = async function (
   return await bcrypt.compare(providedPassword, previewsPass);
 };
 
-userSchema.statics.isAdminExist = async function (
+userSchema.statics.isUserExist = async function (
   phone: string
 ): Promise<IAdminInterface | null> {
   const user = await User.findOne({ phoneNumber: phone });

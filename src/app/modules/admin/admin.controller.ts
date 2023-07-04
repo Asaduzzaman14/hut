@@ -46,6 +46,7 @@ const loginAdminController: RequestHandler = catchAsync(
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken } = req.cookies;
+  console.log(refreshToken, " this is refresh token from cookies");
 
   const result = await AdminServices.refreshToken(refreshToken);
 

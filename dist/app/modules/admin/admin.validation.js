@@ -1,33 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserSchemaValidation = void 0;
+exports.AdminSchemaValidation = void 0;
 const zod_1 = require("zod");
-const auth_constance_1 = require("./auth.constance");
-const createUserSchema = zod_1.z.object({
+const adminValidationSchema = zod_1.z.object({
     body: zod_1.z.object({
-        password: zod_1.z.string({
-            required_error: "password is required",
+        phoneNumber: zod_1.z.string({
+            required_error: "Phone number is required",
         }),
-        role: zod_1.z.enum([...auth_constance_1.userRole]),
+        role: zod_1.z.enum(["admin"]),
+        password: zod_1.z.string({
+            required_error: "Password is required",
+        }),
         name: zod_1.z.object({
             firstName: zod_1.z.string({
-                required_error: "First name is Required",
+                required_error: "First name is required",
             }),
             lastName: zod_1.z.string({
-                required_error: "First name is Required",
+                required_error: "last name is required",
             }),
         }),
-        phoneNumber: zod_1.z.string({
-            required_error: "phoneNumber is required",
-        }),
         address: zod_1.z.string({
-            required_error: "address is required",
+            required_error: "Address is required",
         }),
-        budget: zod_1.z.number().positive("Budget must be a positive number"),
-        income: zod_1.z.number().nonnegative("Income must be a non-negative number"),
     }),
 });
-const userLoginValidationSchema = zod_1.z.object({
+const adminLoginValidationSchema = zod_1.z.object({
     body: zod_1.z.object({
         phoneNumber: zod_1.z.string({
             required_error: "Phone number is required",
@@ -44,8 +41,8 @@ const refreshTokenZodSchema = zod_1.z.object({
         }),
     }),
 });
-exports.UserSchemaValidation = {
-    createUserSchema,
-    userLoginValidationSchema,
+exports.AdminSchemaValidation = {
+    adminValidationSchema,
+    adminLoginValidationSchema,
     refreshTokenZodSchema,
 };

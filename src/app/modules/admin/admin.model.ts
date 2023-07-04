@@ -43,10 +43,9 @@ export const adminSchema = new Schema<IAdminInterface>(
 );
 
 adminSchema.statics.isAdminExist = async function (
-  phone: string
+  id: string
 ): Promise<IAdminInterface | null> {
-  const admin = await Admin.findOne({ phoneNumber: phone });
-
+  const admin = await Admin.findOne({ _id: id });
   return admin;
 };
 

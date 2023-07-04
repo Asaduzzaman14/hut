@@ -33,13 +33,27 @@ const createUser = (paylode) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getCows = (filters, pageinationOptions) => __awaiter(void 0, void 0, void 0, function* () {
     // const { query, ...filtersData } = filters;
-    const { searchTerm } = filters, filtersData = __rest(filters, ["searchTerm"]);
+    const { searchTerm, minPrice, maxPrice } = filters, filtersData = __rest(filters, ["searchTerm", "minPrice", "maxPrice"]);
     const andCondation = [];
     if (searchTerm) {
         andCondation.push({
             $or: cow_constance_1.cowSearchingFields.map((field) => ({
                 [field]: { $regex: searchTerm, $options: "i" },
             })),
+        });
+    }
+    if (minPrice) {
+        andCondation.push({
+            price: {
+                $gte: Number(minPrice),
+            },
+        });
+    }
+    if (maxPrice) {
+        andCondation.push({
+            price: {
+                $lte: Number(maxPrice),
+            },
         });
     }
     if (Object.keys(filtersData).length) {

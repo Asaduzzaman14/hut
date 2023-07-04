@@ -10,9 +10,11 @@ const http_status_1 = __importDefault(require("http-status"));
 const routes_1 = __importDefault(require("./app/routes"));
 const globa_Errorhandler_1 = __importDefault(require("./app/middlewares/globa;Errorhandler"));
 // parser
-app.use((0, cors_1.default)());
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json()); // Add this line to parse JSON data
+app.use((0, cors_1.default)());
+app.use((0, cookie_parser_1.default)());
 // application routes
 app.use("/api/v1/", routes_1.default);
 // global error handler

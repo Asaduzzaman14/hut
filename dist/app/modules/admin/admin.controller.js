@@ -23,25 +23,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthUserController = void 0;
-const http_status_1 = __importDefault(require("http-status"));
-const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
+exports.AdminController = void 0;
 const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
-const auth_services_1 = require("./auth.services");
+const admin_service_1 = require("./admin.service");
+const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
+const http_status_1 = __importDefault(require("http-status"));
 const config_1 = __importDefault(require("../../../config"));
-const createUsers = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userData = __rest(req.body, []);
-    const result = yield auth_services_1.AuthUserServices.createUser(userData);
+const createAdminController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const adminData = __rest(req.body, []);
+    const result = yield admin_service_1.AdminServices.createAdmin(adminData);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: "Successfully User Created",
+        message: "Successfully Admin Created",
         data: result,
     });
 }));
-const loginUsers = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const loginAdminController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const loginData = __rest(req.body, []);
-    const result = yield auth_services_1.AuthUserServices.loginUsers(loginData);
+    const result = yield admin_service_1.AdminServices.loginAdmin(loginData);
     const { refreshToken } = result, orhers = __rest(result, ["refreshToken"]);
     const cookieOptions = {
         secure: config_1.default.env === "prouction",
@@ -51,13 +51,14 @@ const loginUsers = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: "User logged in successfully",
+        message: "Successfully Loggedin",
         data: orhers,
     });
 }));
 const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { refreshToken } = req.cookies;
-    const result = yield auth_services_1.AuthUserServices.refreshToken(refreshToken);
+    console.log(refreshToken, " this is refresh token from cookies");
+    const result = yield admin_service_1.AdminServices.refreshToken(refreshToken);
     // set refresh token into cookie
     const cookieOptions = {
         secure: config_1.default.env === "prouction",
@@ -67,13 +68,13 @@ const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: "New access token generated successfully !",
+        message: "refresh Token",
         data: result,
     });
     // console.log(req.body);
 }));
-exports.AuthUserController = {
-    createUsers,
-    loginUsers,
+exports.AdminController = {
+    createAdminController,
+    loginAdminController,
     refreshToken,
 };
