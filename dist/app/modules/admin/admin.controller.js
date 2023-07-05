@@ -57,7 +57,7 @@ const loginAdminController = (0, catchAsync_1.default)((req, res) => __awaiter(v
 }));
 const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { refreshToken } = req.cookies;
-    console.log(refreshToken, " this is refresh token from cookies");
+    // console.log(refreshToken, " this is refresh token from cookies");
     const result = yield admin_service_1.AdminServices.refreshToken(refreshToken);
     // set refresh token into cookie
     const cookieOptions = {
@@ -68,7 +68,7 @@ const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: "refresh Token",
+        message: "New access token generated successfully !",
         data: result,
     });
     // console.log(req.body);

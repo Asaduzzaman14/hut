@@ -72,7 +72,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 
   // // user deleted fromd database then have refresh token
   // // checking deleted user
-  const isAdminExist = await Admin.isAdminExist(_id);
+  const isAdminExist = await Admin.isAdminExistForRefreshToken(_id);
   if (!isAdminExist) {
     throw new ApiError(httpStatus.NOT_FOUND, "Admin Does not exist");
   }

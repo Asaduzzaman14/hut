@@ -26,6 +26,7 @@ export type IAdminInterface = {
 
 export type AdminModel = {
   isAdminExist(phoneNumber: string): Promise<IAdminInterface>;
+  isAdminExistForRefreshToken(id: string): Promise<IAdminInterface>;
   isPasswordMatch(
     providedPassword: string,
     currentPassword: string
