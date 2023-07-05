@@ -63,7 +63,6 @@ const getProfileInfo = async (token: string): Promise<IMyDate | null> => {
   } else {
     userDate = await Admin.findById({ _id });
   }
-  console.log(userDate);
 
   return userDate;
 };
