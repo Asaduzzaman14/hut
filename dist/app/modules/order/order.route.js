@@ -6,11 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const order_controller_1 = require("./order.controller");
+const user_1 = require("../../../enums/user");
+const auth_1 = __importDefault(require("../../middlewares/auth"));
 const router = express_1.default.Router();
-router.post("/", 
-//  auth(ENUM_USER_ROLE.BUYER),
-order_controller_1.OrderControllers.createOrder);
-router.get("/", 
-// auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
-order_controller_1.OrderControllers.createOrder);
+router.post("/", (0, auth_1.default)(user_1.ENUM_USER_ROLE.BUYER), order_controller_1.OrderControllers.createOrder);
+router.get("/:id", order_controller_1.OrderControllers.getsingleOrder);
+router.get("/", (0, auth_1.default)(user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.BUYER, user_1.ENUM_USER_ROLE.SELLER), order_controller_1.OrderControllers.createOrder);
 exports.OrderRoutes = router;

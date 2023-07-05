@@ -6,6 +6,15 @@ export type ILoginUser = {
   phoneNumber: string;
   password: string;
 };
+export type IMyDate = {
+  phoneNumber: string;
+  password: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  address: string;
+};
 
 export type IAuthUsers = {
   phoneNumber: string;

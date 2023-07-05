@@ -59,9 +59,21 @@ const deleteUserById = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         data: result,
     });
 });
+const myProfile = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { refreshToken } = req.cookies;
+    //     console.log(refreshToken);
+    const result = yield user_services_1.UserServices.getProfileInfo(refreshToken);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "User's information retrieved successfully",
+        data: result,
+    });
+}));
 exports.UserController = {
     getAllUsers,
     updateUser,
     getUserById,
     deleteUserById,
+    myProfile,
 };

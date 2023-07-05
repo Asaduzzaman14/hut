@@ -46,7 +46,7 @@ const loginAdminController: RequestHandler = catchAsync(
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken } = req.cookies;
-  console.log(refreshToken, " this is refresh token from cookies");
+  // console.log(refreshToken, " this is refresh token from cookies");
 
   const result = await AdminServices.refreshToken(refreshToken);
 
@@ -61,15 +61,14 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "refresh Token",
+    message: "New access token generated successfully !",
     data: result,
   });
-
-  // console.log(req.body);
 });
 
 export const AdminController = {
   createAdminController,
+
   loginAdminController,
   refreshToken,
 };

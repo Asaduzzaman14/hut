@@ -18,6 +18,7 @@ export const adminSchema = new Schema<IAdminInterface>(
     password: {
       type: String,
       required: true,
+      select: 0,
     },
     name: {
       type: {
@@ -43,6 +44,13 @@ export const adminSchema = new Schema<IAdminInterface>(
 );
 
 adminSchema.statics.isAdminExist = async function (
+  phoneNumber: string
+): Promise<IAdminInterface | null> {
+  const admin = await Admin.findOne({ phoneNumber: phoneNumber });
+  return admin;
+};
+
+adminSchema.statics.isAdminExistForRefreshToken = async function (
   id: string
 ): Promise<IAdminInterface | null> {
   const admin = await Admin.findOne({ _id: id });

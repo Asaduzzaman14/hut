@@ -56,7 +56,7 @@ const refreshToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(verifiedToken);
     // // user deleted fromd database then have refresh token
     // // checking deleted user
-    const isAdminExist = yield admin_model_1.Admin.isAdminExist(_id);
+    const isAdminExist = yield admin_model_1.Admin.isAdminExistForRefreshToken(_id);
     if (!isAdminExist) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "Admin Does not exist");
     }

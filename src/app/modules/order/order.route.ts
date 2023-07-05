@@ -6,16 +6,13 @@ import auth from "../../middlewares/auth";
 
 const router = express.Router();
 
-router.post(
-  "/",
-  //  auth(ENUM_USER_ROLE.BUYER),
-  OrderControllers.createOrder
-);
+router.post("/", auth(ENUM_USER_ROLE.BUYER), OrderControllers.createOrder);
+router.get("/:id", OrderControllers.getsingleOrder);
 
 router.get(
   "/",
-  // auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
-  OrderControllers.createOrder
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
+  OrderControllers.getAllOrders
 );
 
 export const OrderRoutes = router;

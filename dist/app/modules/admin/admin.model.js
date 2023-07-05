@@ -30,6 +30,7 @@ exports.adminSchema = new mongoose_1.Schema({
     password: {
         type: String,
         required: true,
+        select: 0,
     },
     name: {
         type: {
@@ -51,7 +52,13 @@ exports.adminSchema = new mongoose_1.Schema({
 }, {
     timestamps: true,
 });
-exports.adminSchema.statics.isAdminExist = function (id) {
+exports.adminSchema.statics.isAdminExist = function (phoneNumber) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const admin = yield exports.Admin.findOne({ phoneNumber: phoneNumber });
+        return admin;
+    });
+};
+exports.adminSchema.statics.isAdminExistForRefreshToken = function (id) {
     return __awaiter(this, void 0, void 0, function* () {
         const admin = yield exports.Admin.findOne({ _id: id });
         return admin;
