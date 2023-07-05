@@ -7,6 +7,7 @@ import auth from "../../middlewares/auth";
 const router = express.Router();
 
 router.post("/", auth(ENUM_USER_ROLE.BUYER), OrderControllers.createOrder);
+router.get("/:id", OrderControllers.getsingleOrder);
 
 router.get(
   "/",
