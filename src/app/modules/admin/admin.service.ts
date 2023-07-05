@@ -68,7 +68,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   }
 
   const { _id } = verifiedToken;
-  console.log(verifiedToken);
+  // console.log(verifiedToken);
 
   // // user deleted fromd database then have refresh token
   // // checking deleted user

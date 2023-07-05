@@ -14,9 +14,9 @@ Application Routes:
 
 - https://cow-hut-snowy.vercel.app/api/v1/cows (post)
 - https://cow-hut-snowy.vercel.app/api/v1/cows/ (get)
-- https://cow-hut-snowy.vercel.app/api/v1/cows/648ef54e6764f7bb7eab5129 (Single GET)
-- https://cow-hut-snowy.vercel.app/api/v1/cows/648ef54e6764f7bb7eab5129 (PATCH)
-- https://cow-hut-snowy.vercel.app/api/v1/cows/648ef54e6764f7bb7eab5129 (Delete)
+- https://cow-hut-snowy.vercel.app/api/v1/cows/64a513697aa80293b63e9f27 (Single GET)
+- https://cow-hut-snowy.vercel.app/api/v1/cows/64a513697aa80293b63e9f27 (PATCH)
+- https://cow-hut-snowy.vercel.app/api/v1/cows/64a513697aa80293b63e9f27 (Delete)
 
 ### pagination
 
@@ -42,4 +42,4 @@ Application Routes:
 
 ## order
 
-- https://cow-hut-snowy.vercel.app/api/v1/orders/6177a5b87d32123f08d2f5d4 (GET)
+- https://cow-hut-snowy.vercel.app/api/v1/orders/648eff5d4a032db7ab77fd90 (GET)
