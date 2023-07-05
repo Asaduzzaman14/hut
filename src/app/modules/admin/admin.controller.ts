@@ -64,12 +64,11 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
     message: "New access token generated successfully !",
     data: result,
   });
-
-  // console.log(req.body);
 });
 
 export const AdminController = {
   createAdminController,
+
   loginAdminController,
   refreshToken,
 };
